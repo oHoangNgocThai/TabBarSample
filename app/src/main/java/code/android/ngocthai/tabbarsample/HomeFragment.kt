@@ -1,15 +1,40 @@
 package code.android.ngocthai.tabbarsample
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import code.android.ngocthai.tabbarsample.base.ui.BaseFragment
+import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    companion object {
+
+        private val TAG = HomeFragment::class.java.simpleName
+
+        private const val KEY_CONTENT = "content"
+
+        @Volatile
+        private var INSTANCE: HomeFragment? = null
+
+        fun getInstance(content: String): HomeFragment =
+                INSTANCE ?: synchronized(this) {
+                    INSTANCE ?: HomeFragment().also {
+                        val args = Bundle().apply {
+                            putString(KEY_CONTENT, content)
+                        }
+                        it.arguments = args
+                        INSTANCE = it
+                    }
+                }
     }
 
+    private var mContent: String? = null
+
+    override val layoutResource: Int
+        get() = R.layout.fragment_home
+
+    override fun initComponent(savedInstanceState: Bundle?) {
+        mContent = arguments?.getString(KEY_CONTENT)
+
+        textContent.text = mContent
+    }
 }

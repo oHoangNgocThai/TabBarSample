@@ -8,11 +8,21 @@ class ViewPagerAdapter(
         fragmentManager: FragmentManager
 ) : FragmentPagerAdapter(fragmentManager) {
 
-    override fun getCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    private val mFragments = arrayListOf<Fragment>()
+    private val mTitles = arrayListOf<String>()
+
+    override fun getCount(): Int = mFragments.size
+
+    override fun getItem(position: Int): Fragment {
+        return mFragments[position]
     }
 
-    override fun getItem(p0: Int): Fragment {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun addFragment(fragment: Fragment, title: String) {
+        mFragments.add(fragment)
+        mTitles.add(title)
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return mTitles[position]
     }
 }
