@@ -1,22 +1,25 @@
-package code.android.ngocthai.tabbarsample
+package code.android.ngocthai.tabbarsample.mainapp.ui
 
 import android.os.Bundle
+import code.android.ngocthai.tabbarsample.R
 import code.android.ngocthai.tabbarsample.base.ui.BaseFragment
-import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
-class SearchFragment : BaseFragment() {
+class HomeFragment : BaseFragment() {
 
     companion object {
-        private val TAG = SearchFragment::class.java.simpleName
 
-        private val KEY_CONTENT = "content"
+        private val TAG = HomeFragment::class.java.simpleName
+
+        private const val KEY_CONTENT = "content"
 
         @Volatile
-        private var INSTANCE: SearchFragment? = null
+        private var INSTANCE: HomeFragment? = null
 
-        fun getInstance(content: String): SearchFragment =
+        fun getInstance(content: String): HomeFragment =
                 INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: SearchFragment().also {
+                    INSTANCE
+                            ?: HomeFragment().also {
                         val args = Bundle().apply {
                             putString(KEY_CONTENT, content)
                         }
@@ -29,7 +32,7 @@ class SearchFragment : BaseFragment() {
     private var mContent: String? = null
 
     override val layoutResource: Int
-        get() = R.layout.fragment_search
+        get() = R.layout.fragment_home
 
     override fun initComponent(savedInstanceState: Bundle?) {
         mContent = arguments?.getString(KEY_CONTENT)

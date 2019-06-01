@@ -1,22 +1,24 @@
-package code.android.ngocthai.tabbarsample
+package code.android.ngocthai.tabbarsample.mainapp.ui
 
 import android.os.Bundle
+import code.android.ngocthai.tabbarsample.R
 import code.android.ngocthai.tabbarsample.base.ui.BaseFragment
-import kotlinx.android.synthetic.main.fragment_user.*
+import kotlinx.android.synthetic.main.fragment_search.*
 
-class UserFragment : BaseFragment() {
+class SearchFragment : BaseFragment() {
 
     companion object {
-        private val TAG = UserFragment::class.java.simpleName
+        private val TAG = SearchFragment::class.java.simpleName
 
         private val KEY_CONTENT = "content"
 
         @Volatile
-        private var INSTANCE: UserFragment? = null
+        private var INSTANCE: SearchFragment? = null
 
-        fun getInstance(content: String): UserFragment =
+        fun getInstance(content: String): SearchFragment =
                 INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: UserFragment().also {
+                    INSTANCE
+                            ?: SearchFragment().also {
                         val args = Bundle().apply {
                             putString(KEY_CONTENT, content)
                         }
