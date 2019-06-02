@@ -6,6 +6,8 @@
 
 * TabLayout được thiết kế để thêm các tab được scroll theo chiều ngang nếu như có nhiều tab trong 1 màn hình.
 
+* Thông thường TabLayout hay được sử dụng với ViewPager để người dùng dễ dàng chuyển tab bằng cách vuốt chứ không phải mặc định là nhấn vào từng tab.
+
 ## Implement
 
 ### Basic TabLayout
@@ -159,4 +161,18 @@ override fun getPageTitle(position: Int): CharSequence? {
 
 * Trường hợp muốn custom lại view từng tab của TabLayout, bạn sẽ phải tạo ra một layout bên ngoài rồi sử dụng phương thức **setCustomView** của TabLayout để set lại cho TabLayout.
 
+```
+val viewHome = LayoutInflater.from(this).inflate(R.layout.item_tabs, null).apply {
+    textNotify.visibility = View.VISIBLE
+    textTitle.text = "Home"
+    imageIcon.setImageResource(R.drawable.ic_home_24dp)
+}
+tabMain.getTabAt(TabType.HOME.position)?.customView = viewHome
+```
 
+* Ở dưới các tab được select, mặc định sẽ có 1 thanh indicator với màu sắc mặc định của ứng dụng, ta có thể thay đổi màu sắc của nó hoặc là ẩn đi bằng các thuộc tính **tabIndicatorColor** hoặc **tabIndicatorHeight** được setup bên trong xml hoặc code.
+
+```
+app:tabIndicatorHeight="0dp"
+app:tabIndicatorColor="@color/colorPrimary"
+```

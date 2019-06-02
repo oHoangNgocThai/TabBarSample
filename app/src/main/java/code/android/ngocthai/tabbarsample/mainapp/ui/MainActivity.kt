@@ -5,9 +5,12 @@ import android.support.annotation.IdRes
 import android.support.annotation.NonNull
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
+import android.view.LayoutInflater
+import android.view.View
 import code.android.ngocthai.tabbarsample.R
 import code.android.ngocthai.tabbarsample.base.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_tabs.view.*
 
 class MainActivity : BaseActivity() {
 
@@ -77,9 +80,27 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupTabIcon() {
-        tabMain.getTabAt(TabType.HOME.position)?.setIcon(tabIcons[TabType.HOME.position])
-        tabMain.getTabAt(TabType.SEARCH.position)?.setIcon(tabIcons[TabType.SEARCH.position])
-        tabMain.getTabAt(TabType.USER.position)?.setIcon(tabIcons[TabType.USER.position])
+        val viewHome = LayoutInflater.from(this).inflate(R.layout.item_tabs, null).apply {
+            textNotify.visibility = View.VISIBLE
+            textTitle.text = "Home"
+            imageIcon.setImageResource(R.drawable.ic_home_24dp)
+        }
+        tabMain.getTabAt(TabType.HOME.position)?.customView = viewHome
+
+        val viewSearch = LayoutInflater.from(this).inflate(R.layout.item_tabs, null).apply {
+            textNotify.visibility = View.GONE
+            textTitle.text = "Search"
+            imageIcon.setImageResource(R.drawable.ic_home_24dp)
+        }
+        tabMain.getTabAt(TabType.SEARCH.position)?.customView = viewSearch
+
+        val viewUser = LayoutInflater.from(this).inflate(R.layout.item_tabs, null).apply {
+            textNotify.visibility = View.GONE
+            textTitle.text = "User"
+            imageIcon.setImageResource(R.drawable.ic_home_24dp)
+        }
+        tabMain.getTabAt(TabType.USER.position)?.customView = viewUser
+
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
